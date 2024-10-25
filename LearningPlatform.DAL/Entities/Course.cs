@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using LearningPlatform.DAL.Data.Enum;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +20,8 @@ namespace LearningPlatform.DAL.Entities
 		public int TotalLecture { get; set; }
 		public int CourseTime { get; set; }
 		public double Price { get; set; }
+		public Level Level { get; set; }
+		public bool IsTrending{ get; set; }
 		[DisplayName("Category")]
 		public int CategoryId { get; set; }
 		[ValidateNever]

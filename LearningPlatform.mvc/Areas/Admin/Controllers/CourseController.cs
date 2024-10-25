@@ -11,7 +11,7 @@ namespace LearningPlatform.mvc.Areas.Admin.Controllers
     [Area("Admin")]
     public class CourseController : Controller
     {
-        private IUnitOfWork _unitOfWork;
+        private IUnitOfWork _unitOfWork; 
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         public CourseController(IUnitOfWork unitOfWork,IWebHostEnvironment webHostEnvironment)
@@ -20,8 +20,9 @@ namespace LearningPlatform.mvc.Areas.Admin.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-		public IActionResult Index()
+		public IActionResult Index(string searchTerm)
         {
+
             var categories = _unitOfWork.Course.GetAll(Includeword:"Category");
             return View(categories);
         }
@@ -124,17 +125,11 @@ namespace LearningPlatform.mvc.Areas.Admin.Controllers
 
 
 
-        [HttpDelete]
+        [HttpPost]
         public IActionResult DeleteCourse(int id)
         {
-            var course = _unitOfWork.Course.GetFirstorDefault(x => x.Id == id);
-            if (course == null)
-            {
-                return Json(new { success = false, message = "Error while deleting" });
-            }
-
+            var course = _unitOfWork.Course.GetFirstorDefault(x => x.Id == id);           
             _unitOfWork.Course.Remove(course);
-
             var oldImg = Path.Combine(_webHostEnvironment.WebRootPath, course.Image.TrimStart('\\'));
             if (System.IO.File.Exists(oldImg))
             {
@@ -142,8 +137,9 @@ namespace LearningPlatform.mvc.Areas.Admin.Controllers
             }
 
             _unitOfWork.Complete();
-            return Json(new { success = true, message = "Course deleted successfully" });
+            return RedirectToAction("Index");
         }
+        
 
 
 

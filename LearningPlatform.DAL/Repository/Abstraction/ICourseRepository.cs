@@ -10,5 +10,6 @@ namespace LearningPlatform.DAL.Repository.Abstraction
 	public interface ICourseRepository:IGenericRepository<Course>
 	{
 		void Update(Course course);
+		IEnumerable<Course> TrendingCourse();
 	}
 }

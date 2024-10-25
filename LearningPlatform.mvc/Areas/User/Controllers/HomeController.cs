@@ -1,7 +1,10 @@
 ﻿using LearningPlatform.BLL.ViewModels;
+using LearningPlatform.DAL.Entities;
 using LearningPlatform.DAL.Repository.Abstraction;
 using LearningPlatform.DAL.Repository.Impelementation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace LearningPlatform.mvc.Areas.User.Controllers
 {
@@ -14,7 +17,7 @@ namespace LearningPlatform.mvc.Areas.User.Controllers
 		{
 			_unitOfWork = unitOfWork;
 		}
-		public IActionResult Index()
+		public IActionResult Courses()
 		{
 			var categories = _unitOfWork.Category.GetAll();
 			var courses = _unitOfWork.Course.GetAll();
@@ -23,18 +26,29 @@ namespace LearningPlatform.mvc.Areas.User.Controllers
 				Categories = categories,
 				Courses = courses
 			};
+			
+			return View(viewModel);
+		}
+		public IActionResult Index()
+		{
+			var categories = _unitOfWork.Category.GetAll();
+			var courses = _unitOfWork.Course.GetAll().Take(8);
+			var trendingCourse = _unitOfWork.Course.TrendingCourse();
+			var viewModel = new CourseViewModel
+			{
+				Categories = categories,
+				Courses = courses,
+				TrendingCourse = trendingCourse
+			};
 			return View(viewModel);
 		}
 		public IActionResult Details(int id)
 		{
-			ShoppingCart obj = new ShoppingCart()
-			{
-				Course = _unitOfWork.Course.GetFirstorDefault(x => x.Id == id, Includeword: "Category"),
-				Count = 1
-			};
-			return View(obj);
+			var result = _unitOfWork.Course.GetFirstorDefault(x => x.Id == id, Includeword: "Category");
+
+			return View(result);
 		}
-		public IActionResult Category(int categoryId)
+        public IActionResult Category(int categoryId)
 		{
 			var courses = _unitOfWork.Course.GetAll(x => x.CategoryId == categoryId).Select(item => new
 			{
@@ -45,13 +59,14 @@ namespace LearningPlatform.mvc.Areas.User.Controllers
 				item.CourseTime,
 				item.TotalLecture,
 				item.Price,
-				ImageUrl = Url.Content("/" + item.Image) // Ensure correct image URL
+				Level = item.Level.ToString(),
+				ImageUrl = Url.Content("/" + item.Image) 
 			});
 			return Json(courses);
 		}
 		public IActionResult GetAllCourses()
 		{
-			var allcourses= _unitOfWork.Course.GetAll().Select(item => new
+			var allcourses= _unitOfWork.Course.GetAll().Take(8).Select(item => new
 			{
 				item.Id,
 				item.CourseName,
@@ -60,6 +75,7 @@ namespace LearningPlatform.mvc.Areas.User.Controllers
 				item.CourseTime,
 				item.TotalLecture,
 				item.Price,
+				Level = item.Level.ToString(),
 				ImageUrl = Url.Content("/" + item.Image)
 			});
 			return Json(allcourses);

@@ -7,11 +7,9 @@
 	<!-- Meta Tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="author" content="Webestica.com">
-	<meta name="description" content="Eduport- LMS, Education and Course Theme">
-
+	<title>@ViewData["Title"] - Eduport</title>
 	<!-- Favicon -->
-	<link rel="shortcut icon" href="assets/images/favicon.ico">
+	<link rel="shortcut icon" href="~/assets/images/favicon.ico">
 
 	<!-- Google Font -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +36,7 @@
 			<div class="container">
 				<div class="row">
 					<!-- Right sidebar START -->
-					<div class="col-xl-3">
+					<div class="col-xl-3" >
 						<!-- Responsive offcanvas body START -->
 						<nav class="navbar navbar-light navbar-expand-xl mx-0">
 							<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -48,21 +46,16 @@
 									<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 								</div>
 								<!-- Offcanvas body -->
-								<div class="offcanvas-body p-3 p-xl-0">
+								<div class="offcanvas-body p-3 p-xl-0" style="height: 541px;">
 									<div class="bg-dark border rounded-3 pb-0 p-3 w-100">
 										<!-- Dashboard menu -->
 										<div class="list-group list-group-dark list-group-borderless">
-											<a class="list-group-item active" href="instructor-dashboard.html"><i class="bi bi-ui-checks-grid fa-fw me-2"></i>Dashboard</a>
-											<a class="list-group-item" href="instructor-manage-course.html"><i class="bi bi-basket fa-fw me-2"></i>My Courses</a>
-											<a class="list-group-item" href="instructor-earning.html"><i class="bi bi-graph-up fa-fw me-2"></i>Earnings</a>
-											<a class="list-group-item" href="instructor-studentlist.html"><i class="bi bi-people fa-fw me-2"></i>Students</a>
-											<a class="list-group-item" href="instructor-order.html"><i class="bi bi-folder-check fa-fw me-2"></i>Orders</a>
-											<a class="list-group-item" href="instructor-review.html"><i class="bi bi-star fa-fw me-2"></i>Reviews</a>
-											<a class="list-group-item" href="instructor-edit-profile.html"><i class="bi bi-pencil-square fa-fw me-2"></i>Edit Profile</a>
-											<a class="list-group-item" href="instructor-payout.html"><i class="bi bi-wallet2 fa-fw me-2"></i>Payouts</a>
-											<a class="list-group-item" href="instructor-setting.html"><i class="bi bi-gear fa-fw me-2"></i>Settings</a>
-											<a class="list-group-item" href="instructor-delete-account.html"><i class="bi bi-trash fa-fw me-2"></i>Delete Profile</a>
-											<a class="list-group-item text-danger bg-danger-soft-hover" href="sign-in.html"><i class="fas fa-sign-out-alt fa-fw me-2"></i>Sign Out</a>
+											<a class="list-group-item active" asp-action="Index" asp-controller="Dashboard" ><i class="bi bi-ui-checks-grid fa-fw me-2"></i>Dashboard</a>
+											<a class="list-group-item"  asp-action="Index" asp-controller="Course" ><i class="bi bi-basket fa-fw me-2"></i>All Courses</a>
+											<a class="list-group-item" asp-action="Index" asp-controller="Category"><i class="bi bi-basket fa-fw me-2"></i>All Categoies</a>
+											<a class="list-group-item" asp-action="Index" asp-controller="Users" ><i class="bi bi-people fa-fw me-2"></i>All Students</a>
+											<a class="list-group-item" asp-action="Index" asp-controller="Order" ><i class="bi bi-folder-check fa-fw me-2"></i>All Orders</a>
+
 										</div>
 									</div>
 								</div>
@@ -90,13 +83,13 @@
 				<!-- Widget -->
 				<div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
 					<!-- Logo START -->
-					<a href="index.html"> <img class="h-20px" src="assets/images/logo-light.svg" alt="logo"> </a>
+					<a href="index.html"> <img class="h-20px" src="~/assets/images/logo-light.svg" alt="logo"> </a>
 				</div>
 
 				<!-- Widget -->
 				<div class="col-md-4 mb-3 mb-md-0">
 					<div class="text-center text-white">
-						Copyrights ©2021 <a href="#" class="text-reset btn-link">Eduport</a>. All rights reserved.
+						Copyrights ©2024 <a href="#" class="text-reset btn-link">Eduport</a>. All rights reserved.
 					</div>
 				</div>
 				<!-- Widget -->

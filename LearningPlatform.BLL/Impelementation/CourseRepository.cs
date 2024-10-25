@@ -1,8 +1,10 @@
 ﻿using LearningPlatform.DAL.DB;
 using LearningPlatform.DAL.Entities;
 using LearningPlatform.DAL.Repository.Abstraction;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO.Pipelines;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +33,10 @@ namespace LearningPlatform.DAL.Repository.Impelementation
 				result.CategoryId = course.CategoryId;
 			}
 
+		}
+		public IEnumerable<Course> TrendingCourse()
+		{
+			return _context.Courses.Include(c => c.Category).Where(p => p.IsTrending); 
 		}
 	}
 }
